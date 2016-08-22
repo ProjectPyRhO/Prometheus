@@ -33,6 +33,8 @@ chmod a+x *.sh
 ./prometheus.sh
 ```
 
+Alternatively, docker can be installed with `sudo curl -sSL https://get.docker.com/ | sh`. 
+
 Interactive Docker image
 ------------------------
 
