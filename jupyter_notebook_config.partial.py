@@ -28,6 +28,7 @@ c.NotebookApp.extra_template_paths = ['/srv/templates/']
 
 # http://www.harrisgeospatial.com/Support/HelpArticlesDetail/TabId/219/ArtMID/900/ArticleID/14776/Integrating-the-Jupyter-Notebook-with-ESE.aspx
 # We need to create an exception in the Jupyter Notebook security that will allow the Jupyter web page to be embedded in an HTML iframe
+import notebook
 c.NotebookApp.tornado_settings = {
    'headers': {
        'Content-Security-Policy': "frame-ancestors 'self' http://*.projectpyrho.org "
