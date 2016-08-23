@@ -142,7 +142,7 @@ RUN cd $NDIR/iv; ./build.sh; ./configure --prefix=`pwd` --with-x --x-includes=/u
 #RUN cd $NDIR/nrn; sh src/nrnmpi/mkdynam.sh; ./build.sh;
 RUN cd $NDIR/nrn; ./build.sh;
 RUN cd $NDIR/nrn; 2to3 -w src/oc/mk_hocusr_h.py; sed -i '1i from __future__ import print_function' src/oc/mk_hocusr_h.py
-RUN cd $NDIR/nrn; sudo sed -i.bak -e "s/print sys.api_version,/from __future__ import print_function; print(sys.api_version)/" configure
+RUN cd $NDIR/nrn; sed -i.bak -e "s/print sys.api_version,/from __future__ import print_function; print(sys.api_version)/" configure
 # --with-music=/usr/local
 RUN cd $NDIR/nrn; ./configure --prefix=`pwd` --with-iv=$NDIR/iv --with-nrnpython=$NRNPY --with-paranrn=dynamic \
 --with-x --x-includes=/usr/include/ --x-libraries=/usr/lib/ --with-mpi && make && make install
