@@ -55,6 +55,7 @@ ENV LANGUAGE en_GB.UTF-8
 
 USER jovyan
 
+RUN conda config --add channels brian-team
 # TODO: Update ipywidgets to 5.1*
 # Install Python 3 packages
 RUN conda install --quiet --yes \
