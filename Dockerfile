@@ -165,7 +165,12 @@ RUN $CONDA_DIR/envs/python2/bin/pip install brian2tools
 ENV NRN_NMODL_PATH $NDIR
 RUN python -c "from pyrho import *; setupNEURON()"
 
+# Does this need accompanying changes in jupyter_notebook_config.py ?
+COPY templates/ /srv/templates/
+
 USER root
+RUN chmod a+rX /srv/templates
+#USER root
 
 RUN apt-get clean && \
     apt-get autoremove && \
