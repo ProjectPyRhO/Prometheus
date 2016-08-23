@@ -187,6 +187,11 @@ COPY Prometheus_demo.ipynb /home/$NB_USER/work/
 COPY jupyter_notebook_config.py /home/$NB_USER/.jupyter/
 RUN chown -R $NB_USER:users /home/$NB_USER/work
 
+# Append tmpnb specific options to the base config
+COPY jupyter_notebook_config.partial.py /tmp/
+RUN cat /tmp/jupyter_notebook_config.partial.py >> /home/$NB_USER/.jupyter/jupyter_notebook_config.py && \
+    rm /tmp/jupyter_notebook_config.partial.py
+
 RUN chown -R $NB_USER:users $NDIR
 
 USER jovyan
