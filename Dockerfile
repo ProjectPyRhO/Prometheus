@@ -11,7 +11,7 @@ USER root
 # NEURON dependencies start at autotools-dev
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-                    libav-tools && \
+                    libav-tools \
                     git \
                     gcc \
                     g++ \
