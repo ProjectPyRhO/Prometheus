@@ -53,7 +53,7 @@ ENV LC_ALL en_GB.UTF-8
 ENV LANG en_GB.UTF-8
 ENV LANGUAGE en_GB.UTF-8
 
-USER jovyan
+USER $NB_USER
 
 RUN conda config --add channels brian-team
 # TODO: Update ipywidgets to 5.1*
@@ -152,7 +152,7 @@ RUN echo 'export NRN_NMODL_PATH=$NDIR' >> /etc/bash.bashrc
 RUN cd $NDIR/nrn/src/nrnpython; python setup.py install
 RUN chmod o+w $NDIR
 
-USER jovyan
+USER $NB_USER
 
 ### Install PyRhO
 ENV VPYRHO 0.9.4
@@ -194,5 +194,5 @@ RUN cat /tmp/jupyter_notebook_config.partial.py >> /home/$NB_USER/.jupyter/jupyt
 
 RUN chown -R $NB_USER:users $NDIR
 
-USER jovyan
+USER $NB_USER
 RUN find . -name '*.ipynb' -exec jupyter trust {} \;
