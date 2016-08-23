@@ -39,6 +39,7 @@ RUN apt-get update && \
                     mercurial \
                     mercurial-common && \
   apt-get clean && \
+  apt-get autoremove && \
   rm -rf /var/lib/apt/lists/*
 # Official Debian and Ubuntu images automatically run apt-get clean
 
@@ -125,8 +126,8 @@ RUN mkdir $NDIR
 
 ENV VNRN 7.4
 ENV VIV 19
-RUN cd /root; wget http://www.neuron.yale.edu/ftp/neuron/versions/v$VNRN/nrn-$VNRN.tar.gz
-RUN cd /root; wget http://www.neuron.yale.edu/ftp/neuron/versions/v$VNRN/iv-$VIV.tar.gz
+RUN cd /root; wget -q http://www.neuron.yale.edu/ftp/neuron/versions/v$VNRN/nrn-$VNRN.tar.gz
+RUN cd /root; wget -q http://www.neuron.yale.edu/ftp/neuron/versions/v$VNRN/iv-$VIV.tar.gz
 RUN mv /root/nrn-$VNRN.tar.gz /root/iv-$VIV.tar.gz $NDIR/
 RUN cd $NDIR; tar xzf iv-$VIV.tar.gz; rm iv-$VIV.tar.gz; mv iv-$VIV iv
 RUN cd $NDIR; tar xzf nrn-$VNRN.tar.gz; rm nrn-$VNRN.tar.gz; mv nrn-$VNRN nrn
@@ -178,10 +179,6 @@ COPY templates/ /srv/templates/
 USER root
 RUN chmod a+rX /srv/templates
 #USER root
-
-RUN apt-get clean && \
-    apt-get autoremove && \
-    rm -rf /var/lib/apt/lists/*
 
 ### Copy demonstration notebook and config files to home directory
 COPY Prometheus_demo.ipynb /home/$NB_USER/work/
