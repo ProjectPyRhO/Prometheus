@@ -32,7 +32,7 @@ import notebook
 c.NotebookApp.tornado_settings = {
    'headers': {
        'Content-Security-Policy': "frame-ancestors 'self' http://*.projectpyrho.org "
-   }
+   },
    'static_url_prefix': 'https://cdn.jupyter.org/notebook/%s/' % notebook.__version__
 }
 #'http://yourhostname:9191/Jupyter/'
