@@ -8,15 +8,36 @@ MAINTAINER Project PyRhO <projectpyrho@gmail.com>
 USER root
 
 # libav-tools for matplotlib anim
+# NEURON dependencies start at autotools-dev
 RUN apt-get update && \
-  apt-get install -y --no-install-recommends libav-tools && \
-  apt-get install -y git \
-                     gcc \
-                     g++ \
-                     gfortran \
-                     libatlas-dev \
-                     libatlas-base-dev \
-                     libfreetype6-dev && \
+    apt-get install -y --no-install-recommends \
+                    libav-tools && \
+                    git \
+                    gcc \
+                    g++ \
+                    gfortran \
+                    libatlas-dev \
+                    libatlas-base-dev \
+                    libfreetype6-dev \
+                    autotools-dev \
+                    autoconf \
+                    automake \
+                    libtool \
+                    bison \
+                    flex \
+                    xfonts-100dpi \
+                    libncurses5-dev \
+                    libxext-dev \
+                    libreadline-dev \
+                    libopenmpi-dev \
+                    openmpi-bin \
+                    openmpi-doc \
+                    openmpi-common \
+                    liblapack-dev \
+                    libblas-dev \
+                    libxft-dev \
+                    mercurial \
+                    mercurial-common && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 # Official Debian and Ubuntu images automatically run apt-get clean
@@ -33,35 +54,42 @@ ENV LANGUAGE en_GB.UTF-8
 
 USER jovyan
 
+# TODO: Update ipywidgets to 5.1*
 # Install Python 3 packages
 RUN conda install --quiet --yes \
     'ipywidgets=4.1*' \
-    'pandas=0.17*' \
+    'pandas=0.18*' \
     'numexpr=2.5*' \
     'matplotlib=1.5*' \
     'scipy=0.17*' \
+    'lmfit=0.9*' \
     'seaborn=0.7*' \
-    'sympy=0.7*' \
-    'cython=0.23*' \
+    'sympy=1.0*' \
+    'cython=0.24*' \
     'bokeh=0.11*' \
-    'h5py=2.5*' \
+    'h5py=2.6*' \
     'nose=1.3*' \
+    'brian2' \
+    'brian2tools' \
     && conda clean -tipsy
 
 # Install Python 2 packages
 RUN conda create --quiet --yes -p $CONDA_DIR/envs/python2 python=2.7 \
-    'ipython=4.1*' \
+    'ipython=4.2*' \
     'ipywidgets=4.1*' \
-    'pandas=0.17*' \
+    'pandas=0.18*' \
     'numexpr=2.5*' \
     'matplotlib=1.5*' \
     'scipy=0.17*' \
+    'lmfit=0.9*' \
     'seaborn=0.7*' \
-    'sympy=0.7*' \
-    'cython=0.23*' \
+    'sympy=1.0*' \
+    'cython=0.24*' \
     'bokeh=0.11*' \
-    'h5py=2.5*' \
+    'h5py=2.6*' \
     'nose=1.3*' \
+    'brian2' \
+    'brian2tools' \
     'pyzmq' \
     && conda clean -tipsy
 
@@ -88,27 +116,6 @@ RUN $CONDA_DIR/envs/python2/bin/python -m ipykernel install
 #USER jovyan
 
 #USER root
-# Dependencies
-RUN apt-get update && \
-  apt-get -y install autotools-dev \
-             autoconf \
-             automake \
-             libtool \
-             bison \
-             flex \
-             xfonts-100dpi \
-             libncurses5-dev \
-             libxext-dev \
-             libreadline-dev \
-             libopenmpi-dev \
-             openmpi-bin \
-             openmpi-doc \
-             openmpi-common \
-             liblapack-dev \
-             libblas-dev \
-             libxft-dev \
-             mercurial \
-             mercurial-common
 
 ENV NDIR /opt/neuron
 ENV NRNPY python3
@@ -151,11 +158,11 @@ ENV VPYRHO 0.9.4
 ## Install for Python 3
 #RUN pip install pyrho[full]==$VPYRHO
 RUN pip install git+https://github.com/ProjectPyRhO/PyRhO.git#egg=PyRhO[full]
-RUN pip install brian2tools
+#RUN pip install brian2tools
 ## Install for Python 2
 #RUN $CONDA_DIR/envs/python2/bin/pip install pyrho[full]==$VPYRHO
 RUN $CONDA_DIR/envs/python2/bin/pip install git+https://github.com/ProjectPyRhO/PyRhO.git#egg=PyRhO[full]
-RUN $CONDA_DIR/envs/python2/bin/pip install brian2tools
+#RUN $CONDA_DIR/envs/python2/bin/pip install brian2tools
 # Alternative to installing for Python 2
 #RUN source activate python2
 #RUN pip install --ignore-installed --no-deps pyrho[full]
