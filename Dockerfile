@@ -57,6 +57,7 @@ USER jovyan
 
 RUN conda config --add channels brian-team
 # TODO: Update ipywidgets to 5.1*
+# conda install -c conda-forge lmfit=0.9.5
 # Install Python 3 packages
 RUN conda install --quiet --yes \
     'ipywidgets=4.1*' \
@@ -64,7 +65,7 @@ RUN conda install --quiet --yes \
     'numexpr=2.5*' \
     'matplotlib=1.5*' \
     'scipy=0.17*' \
-    'lmfit=0.9*' \
+    #'lmfit=0.9*' \
     'seaborn=0.7*' \
     'sympy=1.0*' \
     'cython=0.24*' \
@@ -83,7 +84,7 @@ RUN conda create --quiet --yes -p $CONDA_DIR/envs/python2 python=2.7 \
     'numexpr=2.5*' \
     'matplotlib=1.5*' \
     'scipy=0.17*' \
-    'lmfit=0.9*' \
+    #'lmfit=0.9*' \
     'seaborn=0.7*' \
     'sympy=1.0*' \
     'cython=0.24*' \
