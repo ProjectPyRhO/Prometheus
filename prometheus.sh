@@ -23,7 +23,7 @@ sudo docker run --net=host -d -e CONFIGPROXY_AUTH_TOKEN=$TOKEN --name=tmpnb \
             -e CONFIGPROXY_ENDPOINT=http://127.0.0.1:8001 \
             -v /var/run/docker.sock:/docker.sock \
             jupyter/tmpnb python orchestrate.py --image='pyrho/minimal' \
-            --redirect-uri="/notebooks/Prometheus_demo.ipynb" \
+            --redirect-uri="/notebooks/Prometheus.ipynb" \
             --command="jupyter notebook --NotebookApp.base_url={base_path} --ip=0.0.0.0 --port {port} --no-browser"
 
             # --command='start-notebook.sh "--NotebookApp.base_url={base_path} --ip=0.0.0.0 --port {port} --no-browser --NotebookApp.trust_xheaders=True"'

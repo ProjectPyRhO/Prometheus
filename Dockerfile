@@ -178,7 +178,7 @@ RUN python -c "from pyrho import *; setupNEURON()"
 USER root
 
 ### Copy demonstration notebook and config files to home directory
-COPY Prometheus_demo.ipynb /home/$NB_USER/work/
+COPY Prometheus.ipynb /home/$NB_USER/work/
 #COPY jupyter_notebook_config.py /home/$NB_USER/.jupyter/
 RUN chown -R $NB_USER:users /home/$NB_USER/work
 RUN chown -R $NB_USER:users $NDIR
