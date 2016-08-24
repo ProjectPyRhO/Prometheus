@@ -183,19 +183,22 @@ COPY Prometheus.ipynb /home/$NB_USER/work/
 RUN chown -R $NB_USER:users /home/$NB_USER/work
 RUN chown -R $NB_USER:users $NDIR
 
-#USER $NB_USER
-#RUN find . -name '*.ipynb' -exec jupyter trust {} \;
-
-RUN find /home/$NB_USER/work -name '*.ipynb' -exec jupyter nbconvert --to notebook {} --output {} \; && \
-    chown -R $NB_USER:users /home/$NB_USER && \
-    sudo -u $NB_USER env "PATH=$PATH" find /home/$NB_USER/work -name '*.ipynb' -exec jupyter trust {} \;
 
 #RUN find /home/$NB_USER/work -name '*.ipynb' -exec jupyter nbconvert --to notebook {} --output {} \; && \
-#    chown -R $NB_USER:users /home/$NB_USER
-#RUN find /home/$NB_USER/work -name '*.ipynb' -exec jupyter trust {} \;
+#    chown -R $NB_USER:users /home/$NB_USER && \
+#    sudo -u $NB_USER env "PATH=$PATH" find /home/$NB_USER/work -name '*.ipynb' -exec jupyter trust {} \;
 
+RUN find /home/$NB_USER/work -name '*.ipynb' -exec jupyter nbconvert --to notebook {} --output {} \; && \
+    chown -R $NB_USER:users /home/$NB_USER
+#RUN find /home/$NB_USER/work -name '*.ipynb' -exec jupyter trust {} \;
+USER $NB_USER
+RUN find . -name '*.ipynb' -exec jupyter trust {} \;
+USER root
 
 # Finally, add the site specific try.projectpyrho.org configuration.
+
+# Install our custom.js
+COPY resources/custom.js /home/$NB_USER/.jupyter/custom/
 
 #USER root
 COPY resources/templates/ /srv/templates/
