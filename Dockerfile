@@ -190,6 +190,11 @@ RUN find /home/$NB_USER/work -name '*.ipynb' -exec jupyter nbconvert --to notebo
     chown -R $NB_USER:users /home/$NB_USER && \
     sudo -u $NB_USER env "PATH=$PATH" find /home/$NB_USER/work -name '*.ipynb' -exec jupyter trust {} \;
 
+#RUN find /home/$NB_USER/work -name '*.ipynb' -exec jupyter nbconvert --to notebook {} --output {} \; && \
+#    chown -R $NB_USER:users /home/$NB_USER
+#RUN find /home/$NB_USER/work -name '*.ipynb' -exec jupyter trust {} \;
+
+
 # Finally, add the site specific try.projectpyrho.org configuration.
 
 #USER root
