@@ -1,6 +1,7 @@
 # Configuration file for Jupyter-notebook.
 # https://github.com/jupyter/docker-demo-images/blob/master/resources/jupyter_notebook_config.partial.py
 
+# These four lines are already included in the original base notebook config
 #c = get_config()
 #c.NotebookApp.ip = '*'
 #c.NotebookApp.open_browser = False
