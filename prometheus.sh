@@ -1,9 +1,10 @@
 #!/bin/sh
 
-export POOL_SIZE=7
-export MEM_LIMIT="512m"
-export OVERPROVISION_FACTOR=2
-export CPU_SHARES=$(( (1024*${OVERPROVISION_FACTOR})/${POOL_SIZE} ))
+#export POOL_SIZE=7
+#export MEM_LIMIT="512m"
+#export OVERPROVISION_FACTOR=2
+#export CPU_SHARES=$(( (1024*${OVERPROVISION_FACTOR})/${POOL_SIZE} ))
+#export IP=127.0.0.1
 
 sudo service docker start
 sudo docker build -t pyrho/minimal .
@@ -15,9 +16,11 @@ export TOKEN=$( head -c 30 /dev/urandom | xxd -p )
 
 # --restart=always # for docker run below
 sudo docker run --net=host -d -e CONFIGPROXY_AUTH_TOKEN=$TOKEN --name=proxy \
-            jupyter/configurable-http-proxy --default-target http://127.0.0.1:9999 --port=8000 --api-port=8001
+            jupyter/configurable-http-proxy --default-target http://127.0.0.1:9999 \
+            --port=8000 --api-port=8001
 
-sudo docker run --net=host -d -e CONFIGPROXY_AUTH_TOKEN=$TOKEN --name=tmpnb -e CONFIGPROXY_ENDPOINT=http://127.0.0.1:8001 \
+sudo docker run --net=host -d -e CONFIGPROXY_AUTH_TOKEN=$TOKEN --name=tmpnb \
+            -e CONFIGPROXY_ENDPOINT=http://127.0.0.1:8001 \
             -v /var/run/docker.sock:/docker.sock \
             jupyter/tmpnb python orchestrate.py --image='pyrho/minimal' \
             --redirect-uri="/notebooks/Prometheus_demo.ipynb" \
