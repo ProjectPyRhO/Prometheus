@@ -78,8 +78,7 @@ token:
 #proxy: proxy-image token
 proxy:
 	docker run --net=host -d -e CONFIGPROXY_AUTH_TOKEN=$(TOKEN) --name proxy \
-		jupyter/configurable-http-proxy \
-		--default-target http://$(DOCKER_HOST):9999
+		jupyter/configurable-http-proxy --default-target http://$(DOCKER_HOST):9999
 
 #tmpnb: tmpnb-image token
 tmpnb:
@@ -87,7 +86,7 @@ tmpnb:
 		-v /var/run/docker.sock:/docker.sock jupyter/tmpnb python orchestrate.py \
 		--image=$(DEMO_IMAGE) --cull_timeout=$(CULL_TIMEOUT) --cull_period=$(CULL_PERIOD) \
 		--pool_size=$(POOL_SIZE) --cull_max=$(CULL_MAX) \
-		--redirect-uri="/notebooks/Prometheus.ipynb" \
+		--redirect_uri="/notebooks/Prometheus.ipynb" \
 		--command="jupyter notebook --NotebookApp.base_url={base_path} --ip=0.0.0.0 --port {port} --no-browser"
 # --logging=$(LOGGING)
 
@@ -105,9 +104,9 @@ run:
     -e CONFIGPROXY_ENDPOINT=http://$(DOCKER_HOST):8001 \
     -v /var/run/docker.sock:/docker.sock \
     jupyter/tmpnb python orchestrate.py --image=$(DEMO_IMAGE) \
-		--pool-size=$(POOL_SIZE) --mem-limit=$(MEM_LIMIT) --cpu-shares=$(CPU_SHARES) \
-    --cull-timeout=$(CULL_TIMEOUT) --cull_period=$(CULL_PERIOD) --cull_max=$(CULL_MAX) \
-    --redirect-uri="/notebooks/Prometheus.ipynb" \
+		--pool_size=$(POOL_SIZE) --mem_limit=$(MEM_LIMIT) --cpu_shares=$(CPU_SHARES) \
+    --cull_timeout=$(CULL_TIMEOUT) --cull_period=$(CULL_PERIOD) --cull_max=$(CULL_MAX) \
+    --redirect_uri="/notebooks/Prometheus.ipynb" \
     --command="jupyter notebook --NotebookApp.base_url={base_path} --ip=0.0.0.0 --port {port} --no-browser"
 
 go: redirect token proxy tmpnb image
