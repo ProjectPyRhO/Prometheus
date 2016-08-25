@@ -83,6 +83,12 @@ squash:
 	ID=$(shell docker run -d pyrho/minimal /bin/bash)
 	docker export $(ID) | docker import – prometheus
 
+update:
+	sudo apt-get purge lxc-docker
+	sudo apt-get update
+	sudo apt-get install linux-image-extra-$(shell uname -r)
+	sudo apt-get install docker-engine
+
 upload:
 	docker push pyrho/minimal
 
