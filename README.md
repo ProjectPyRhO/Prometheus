@@ -1,10 +1,17 @@
 Prometheus: Modelling as a Service
 ==================================
 
-This is a repository for building a customised [tmpnb](https://github.com/jupyter/tmpnb) server for optogenetics with [PyRhO](https://github.com/ProjectPyRhO/PyRhO) installed and configured. Credit to the [Jupyter team](https://github.com/orgs/jupyter/people) for their work on tmpnb as one of the many great [Jupyter projects](https://github.com/jupyter)! 
+This is a repository for building a customised [tmpnb](https://github.com/jupyter/tmpnb) server for optogenetics with [PyRhO](https://github.com/ProjectPyRhO/PyRhO) installed and configured. Credit to the [Jupyter team](https://github.com/orgs/jupyter/people) for their work on tmpnb as one of the many great [Jupyter projects](https://github.com/jupyter)!
 
-Quickstart Prometheus
+For updates on PyRhO, follow us on [twitter (@ProjectPyRhO)](https://twitter.com/ProjectPyRhO).
+
+Quickstart: Try PyRhO
 ---------------------
+
+Simply go to [try.projectpyrho.org](http://try.projectpyrho.org) and enjoy!
+
+Build Prometheus
+----------------
 
 #### Create an account to run the portal and disable root access
 See [this guide](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04) for details including generating ssh keys.
