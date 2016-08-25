@@ -13,6 +13,12 @@ Quickstart Prometheus
 
 `cd Prometheus`
 
+`make setup`
+
+`make image`
+
+`make launch`
+
 #### Create an account to run the portal and disable root access
 See [this guide](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04) for details including generating ssh keys.
 
@@ -40,7 +46,7 @@ chmod a+x *.sh
 ./prometheus.sh
 ```
 
-Alternatively, docker can be installed with `sudo curl -sSL https://get.docker.com/ | sh`. 
+Alternatively, docker can be installed with `sudo curl -sSL https://get.docker.com/ | sh`.
 
 Interactive Docker image
 ------------------------
