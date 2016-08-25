@@ -1,2 +1,8 @@
 # Documentation
 README.md
+.git
+.gitignore
+resources/_templates
+resources/scripts
+*.sh
+Makefile

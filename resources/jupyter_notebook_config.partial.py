@@ -1,10 +1,11 @@
 # Configuration file for Jupyter-notebook.
 # https://github.com/jupyter/docker-demo-images/blob/master/resources/jupyter_notebook_config.partial.py
 
-c = get_config()
-c.NotebookApp.ip = '*'
-c.NotebookApp.open_browser = False
-c.NotebookApp.port = 8888 #9999
+# These four lines are already included in the original base notebook config
+#c = get_config()
+#c.NotebookApp.ip = '*'
+#c.NotebookApp.open_browser = False
+#c.NotebookApp.port = 8888 #9999
 
 # Whether to trust or not X-Scheme/X-Forwarded-Proto and X-Real-Ip/X-Forwarded-
 # For headerssent by the upstream reverse proxy. Necessary if the proxy handles
@@ -28,10 +29,11 @@ c.NotebookApp.extra_template_paths = ['/srv/templates/']
 
 # http://www.harrisgeospatial.com/Support/HelpArticlesDetail/TabId/219/ArtMID/900/ArticleID/14776/Integrating-the-Jupyter-Notebook-with-ESE.aspx
 # We need to create an exception in the Jupyter Notebook security that will allow the Jupyter web page to be embedded in an HTML iframe
+import notebook
 c.NotebookApp.tornado_settings = {
    'headers': {
        'Content-Security-Policy': "frame-ancestors 'self' http://*.projectpyrho.org "
-   }
-   #'static_url_prefix': 'https://cdn.jupyter.org/notebook/try-4.0.5/'
+   },
+   'static_url_prefix': 'https://cdn.jupyter.org/notebook/%s/' % notebook.__version__
 }
 #'http://yourhostname:9191/Jupyter/'
