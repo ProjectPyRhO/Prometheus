@@ -1,11 +1,10 @@
 Prometheus: Modelling as a Service
 ==================================
 
-This is a repository for building a customised tmpnb server for optogenetics with PyRhO installed and configured.
+This is a repository for building a customised [tmpnb](https://github.com/jupyter/tmpnb) server for optogenetics with [PyRhO](https://github.com/ProjectPyRhO/PyRhO) installed and configured. Credit to the [Jupyter team](https://github.com/orgs/jupyter/people) for their work on tmpnb as one of the many great [Jupyter projects](https://github.com/jupyter)! 
 
 Quickstart Prometheus
 ---------------------
-
 
 #### Create an account to run the portal and disable root access
 See [this guide](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04) for details including generating ssh keys.
@@ -16,13 +15,14 @@ gpasswd -a monty sudo
 sudo nano /etc/ssh/sshd_config
 ```
 
-Eidt the sshd_config file to disable root login:
+Edit the sshd_config file to disable root login:
 > PermitRootLogin no
 
 Then restart the ssh daemon:
 
 `service ssh restart`
 
+Log out then log back in with the new (non-root) user account.
 Finally update the system, install docker, build the image and launch the server!
 
 ```bash
