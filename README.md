@@ -5,19 +5,16 @@ This is a repository for building a customised tmpnb server for optogenetics wit
 
 Quickstart Prometheus
 ---------------------
-`sudo apt-get update && sudo apt-get upgrade`
 
-`sudo apt-get install make`
-
-`git clone https://github.com/ProjectPyRhO/Prometheus.git`
-
-`cd Prometheus`
-
-`make setup`
-
-`make image`
-
-`make launch`
+```bash
+sudo apt-get update && sudo apt-get upgrade
+sudo apt-get install make
+git clone https://github.com/ProjectPyRhO/Prometheus.git
+cd Prometheus
+make setup
+make image
+make launch
+```
 
 #### Create an account to run the portal and disable root access
 See [this guide](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04) for details including generating ssh keys.
