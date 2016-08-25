@@ -6,10 +6,8 @@ CULL_MAX ?= 3600
 POOL_SIZE ?= 5
 DOCKER_HOST ?= 127.0.0.1
 DEMO_IMAGE ?= pyrho/minimal
-#TOKEN ?= $( shell head -c 30 /dev/urandom | xxd -p )
 
 .PHONY: setup start restart proxy-image tmpnb-image redirect token launch dev open log-proxy log-tmpnb squash update update-all clean nuke uninstall #upload
-
 
 #TAG ?= e736784a1a8f
 # https://github.com/jupyter/docker-demo-images/blob/master/Makefile
@@ -70,19 +68,16 @@ redirect:
 	sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j LOG --log-prefix='[TMPNB] '
 
 token:
-	$(eval TOKEN := $(shell head -c 30 /dev/urandom | xxd -p))
-	echo $(TOKEN)
-#token: 	TOKEN := $( shell head -c 30 /dev/urandom | xxd -p )
-# export TOKEN $( shell head -c 30 /dev/urandom | xxd -p )
+	export TOKEN $( shell head -c 30 /dev/urandom | xxd -p )
 
 #proxy: proxy-image token
-proxy:
+proxy: token
 	docker run --net=host -d -e CONFIGPROXY_AUTH_TOKEN=$(TOKEN) --name proxy \
 		jupyter/configurable-http-proxy \
 		--default-target http://$(DOCKER_HOST):9999
 
 #tmpnb: tmpnb-image token
-tmpnb:
+tmpnb: token
 	docker run --net=host -d -e CONFIGPROXY_AUTH_TOKEN=$(TOKEN) --name tmpnb \
 		-v /var/run/docker.sock:/docker.sock jupyter/tmpnb python orchestrate.py \
 		--image=$(DEMO_IMAGE) --cull_timeout=$(CULL_TIMEOUT) --cull_period=$(CULL_PERIOD) \
@@ -92,12 +87,10 @@ tmpnb:
 # --logging=$(LOGGING)
 
 launch:
-	./resources/scripts/launch.sh
-
-run:
+	#./resources/scripts/launch.sh
 	sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8000
 	sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j LOG --log-prefix='[TMPNB] '
-	#TOKEN:=$(shell head -c 30 /dev/urandom | xxd -p)
+	TOKEN:=$(shell head -c 30 /dev/urandom | xxd -p)
 	docker run --net=host -d -e CONFIGPROXY_AUTH_TOKEN=$(TOKEN) --name=proxy \
     jupyter/configurable-http-proxy --default-target http://$(DOCKER_HOST):9999 \
     --port=8000 --api-port=8001
