@@ -6,6 +6,25 @@ This is a repository for building a customised tmpnb server for optogenetics wit
 Quickstart Prometheus
 ---------------------
 
+
+#### Create an account to run the portal and disable root access
+See [this guide](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04) for details including generating ssh keys.
+
+```bash
+adduser monty
+gpasswd -a monty sudo
+sudo nano /etc/ssh/sshd_config
+```
+
+Eidt the sshd_config file to disable root login:
+> PermitRootLogin no
+
+Then restart the ssh daemon:
+
+`service ssh restart`
+
+Finally update the system, install docker, build the image and launch the server!
+
 ```bash
 sudo apt-get update && sudo apt-get upgrade
 sudo apt-get install make
@@ -16,65 +35,40 @@ make image
 make launch
 ```
 
-#### Create an account to run the portal and disable root access
-See [this guide](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04) for details including generating ssh keys.
-
-`adduser monty`
-
-`gpasswd -a monty sudo`
-
-`sudo nano /etc/ssh/sshd_config`
-
-> PermitRootLogin no
-
-`service ssh restart`
-
-```bash
-git clone https://github.com/ProjectPyRhO/Prometheus
-
-chown -R monty:monty Prometheus/*
-
-cd Prometheus
-
-chmod a+x *.sh
-
-./setup_docker.sh
-
-./prometheus.sh
-```
-
-Alternatively, docker can be installed with `sudo curl -sSL https://get.docker.com/ | sh`.
-
 Interactive Docker image
 ------------------------
 
 #### To run the PyRhO docker image:
 
-`sudo service docker start`
-
-`sudo docker build -t pyrho/minimal .`
-
-`docker run -i -t pyrho/minimal /bin/bash`
+```bash
+sudo service docker start
+docker build -t pyrho/minimal .
+docker run -p 8888:8888 -it pyrho/minimal /bin/bash
+```
 
 Useful commands
 ---------------
 
 #### Clean docker images
-`sudo docker stop $(sudo docker ps -a -q)`
 
-`sudo docker rm $(sudo docker ps -a -q)`
+`make clean`
 
-#### Remove old intermediate layers
-`docker rm $(docker ps -qa --no-trunc --filter "status=exited")`
+Alternatively:
 
-`docker rmi $(docker images -q --no-trunc --filter "dangling=true")`
+```bash
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker rm $(docker ps -qa --no-trunc --filter "status=exited")
+docker rmi $(docker images -q --no-trunc --filter "dangling=true")
+```
 
 #### Check logs
-`sudo docker logs proxy`
 
-`sudo docker logs tmpnb`
+```bash
+make log-proxy
+make log-tmpnb
+sudo iptables -L
+```
 
-`sudo iptables -L`
-
-After an os update it may be necessary to run:
+N.B. After an os update it may be necessary to run:
 `sudo apt-get install linux-image-extra-$(uname -r)`
