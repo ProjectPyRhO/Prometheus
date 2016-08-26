@@ -47,11 +47,17 @@ Interactive Docker image
 
 #### To run the PyRhO docker image:
 
+Start the docker service e.g.:
+`sudo service docker start`
+Then run these commands to build the image and launch the notebook:
+
 ```bash
-sudo service docker start
 docker build -t pyrho/minimal .
-docker run -p 8888:8888 -it pyrho/minimal /bin/bash
+docker run -p 8888:8888 -it pyrho/minimal
 ```
+
+Finally go to your browser and open `localhost:8888`.
+N.B. If you are using docker machine, you will need to replace `localhost` with the IP address of the host, obtained with the following command: `docker-machine ip`. 
 
 Useful commands
 ---------------
