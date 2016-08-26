@@ -53,6 +53,9 @@ restart:
 image: Dockerfile
 	docker build -t $(DEMO_IMAGE) .
 
+demo:
+	docker run -p 8888:8888 -it $(DEMO_IMAGE)
+
 proxy-image:
 	docker pull jupyter/configurable-http-proxy
 
