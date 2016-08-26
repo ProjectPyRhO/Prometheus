@@ -10,6 +10,24 @@ Quickstart: Try PyRhO
 
 Simply go to [try.projectpyrho.org](http://try.projectpyrho.org) and enjoy!
 
+Interactive Docker image
+------------------------
+
+#### To run the PyRhO docker image:
+
+Clone the repository: `git clone https://github.com/ProjectPyRhO/Prometheus.git && cd Prometheus`
+Start the docker service e.g.: `sudo service docker start`
+Then run these commands to build the image and launch the notebook:
+
+```bash
+docker build -t pyrho/minimal .
+docker run -p 8888:8888 -it pyrho/minimal
+```
+
+Finally go to your browser and open `localhost:8888`.
+
+N.B. If you are using docker machine, you will need to replace `localhost` with the IP address of the host, obtained with the following command: `docker-machine ip`.
+
 Build Prometheus
 ----------------
 
@@ -41,23 +59,6 @@ make setup
 make image
 make launch
 ```
-
-Interactive Docker image
-------------------------
-
-#### To run the PyRhO docker image:
-
-Start the docker service e.g.:
-`sudo service docker start`
-Then run these commands to build the image and launch the notebook:
-
-```bash
-docker build -t pyrho/minimal .
-docker run -p 8888:8888 -it pyrho/minimal
-```
-
-Finally go to your browser and open `localhost:8888`.
-N.B. If you are using docker machine, you will need to replace `localhost` with the IP address of the host, obtained with the following command: `docker-machine ip`. 
 
 Useful commands
 ---------------
