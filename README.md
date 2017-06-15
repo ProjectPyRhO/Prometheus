@@ -10,6 +10,29 @@ Quickstart: Try PyRhO
 
 Simply go to [try.projectpyrho.org](http://try.projectpyrho.org) and enjoy!
 
+Further Information
+-------------------
+
+A paper introducing Prometheus and Modelling as a Service (MaaS) can be found [here](https://dx.doi.org/10.1109/BioCAS.2016.7833795). If you use or adapt this work, please use the following citation:
+
+Evans, B. D. and Nikolic, K. (2016) "From Bytes to Insights with Modelling as a Service: A new paradigm for computational modelling illustrated with PyRhO”, in *2016 IEEE Biomedical Circuits and Systems Conference (BioCAS)*, Shanghai, China. p316–319. [doi:10.1109/BioCAS.2016.7833795](https://dx.doi.org/10.1109/BioCAS.2016.7833795)
+
+```
+@InProceedings{Evans+Nikolic2016c,
+  author = {Evans, Benjamin D. and Nikolic, Konstantin},
+  booktitle = {2016 IEEE Biomedical Circuits and Systems Conference (BioCAS)}, 
+  title = {From Bytes to Insights with Modelling as a Service: A new paradigm for computational modelling illustrated with {PyRhO}},
+  year = {2016},
+  month = {Oct},
+  isbn = {978-1-5090-2959-4},
+  location = {Shanghai, China},
+  pages = {316--319},
+  publisher = {IEEE},
+  address = {New York, NY, USA},
+  doi = {10.1109/BioCAS.2016.7833795}, 
+}
+```
+
 Interactive Docker image
 ------------------------
 
